@@ -90,4 +90,10 @@ export default class ValueMap {
     if (this.isMap()) return this.__value__.hasIn(keyPath)
     return !keyPath.length
   }
+  toString () {
+    return `ValueMap<${this.__value__.toString()}>`
+  }
+  inspect () {
+    return this.toString()
+  }
 }
