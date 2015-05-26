@@ -1,6 +1,7 @@
 'use strict'
 
 import {Map} from 'immutable'
+import assert from 'assert'
 
 export default class ValueMap {
   constructor (value) {
@@ -16,15 +17,23 @@ export default class ValueMap {
   get size () {
     return this.isMap() ? this.__value__.size : 0
   }
+  __set__ (updater) {
+    if (typeof updater !== 'function') {
+      const value = updater
+      return value === this.__value__ ? this : new this.constructor(value)
+    }
+    const updated = updater.call(this, this.__value__)
+    return updated === this.__value__ ? this : new this.constructor(updated)
+  }
   set (key, value) {
+    assert(typeof key !== 'function', 'key may not be a function')
     if (arguments.length === 1) {
       value = key
-      if (this.__value__ === value) return this
-      return new this.constructor(value)
+      return this.__set__(value)
     }
-    const map = this.isMap() ? this.__value__ : new Map()
-    const updated = map.set(key, value)
-    return updated === map ? this : new this.constructor(updated)
+    return this.__set__((oldValue) => {
+      return (this.isMap() ? oldValue : new Map()).set(key, value)
+    })
   }
   delete (key) {
     if (!this.isMap()) {
@@ -32,31 +41,26 @@ export default class ValueMap {
       if (this.__value__ === undefined) return this
       return new this.constructor(undefined)
     }
-    const updated = this.__value__.delete(key)
-    return updated === this.__value__ ? this : new this.constructor(updated)
+    return this.__set__(value => value.delete(key))
   }
   clear () {
     return new this.constructor()
   }
   update () {
     if (!this.isMap()) return new this.constructor().update(...arguments)
-    const updated = this.__value__.update(...arguments)
-    return updated === this.__value__ ? this : new this.constructor(updated)
+    return this.__set__(value => value.update(...arguments))
   }
   merge (...iterables) {
     if (!this.isMap()) return new this.constructor().merge(...iterables)
-    const updated = this.__value__.merge(...iterables)
-    return updated === this.__value__ ? this : new this.constructor(updated)
+    return this.__set__(value => value.merge(...iterables))
   }
   mergeDeep (...iterables) {
     if (!this.isMap()) return new this.constructor().mergeDeep(...iterables)
-    const updated = this.__value__.mergeDeep(...iterables)
-    return updated === this.__value__ ? this : new this.constructor(updated)
+    return this.__set__(value => value.mergeDeep(...iterables))
   }
   mergeDeepWith (merger, ...iterables) {
     if (!this.isMap()) return new this.constructor().mergeDeepWith(merger, ...iterables)
-    const updated = this.__value__.mergeDeepWith(merger, ...iterables)
-    return updated === this.__value__ ? this : new this.constructor(updated)
+    return this.__set__(value => value.mergeDeepWith(merger, ...iterables))
   }
   get (key, notSetValue) {
     if (key == null) return this.__value__
