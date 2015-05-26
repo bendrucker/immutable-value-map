@@ -35,13 +35,13 @@ export default class ValueMap {
     const updated = this.__value__.delete(key)
     return updated === this.__value__ ? this : new this.constructor(updated)
   }
+  clear () {
+    return new this.constructor()
+  }
   update () {
     if (!this.isMap()) return new this.constructor().update(...arguments)
     const updated = this.__value__.update(...arguments)
     return updated === this.__value__ ? this : new this.constructor(updated)
-  }
-  clear () {
-    return new this.constructor()
   }
   get (key, notSetValue) {
     if (key == null) return this.__value__
