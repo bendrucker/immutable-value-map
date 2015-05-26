@@ -82,5 +82,27 @@ test((t) => {
     t.equal(map.last(), 'bar')
     t.end()
   })
+  t.test('getIn', (t) => {
+    t.test('value', (t) => {
+      const val = new ValueMap(1)
+      t.equal(val.getIn([]), 1)
+      t.equal(val.getIn(['key'], null), null)
+      t.end()
+    })
+    t.test('map', (t) => {
+      let map = new ValueMap().set('foo', 'bar')
+      t.equal(map.getIn(['foo']), 'bar')
+      t.equal(map.getIn(['bar'], null), null)
+      map.set('foo', fromJS({bar: 'baz'}))
+      t.notOk(ValueMap.isValueMap(map.getIn(['foo'])))
+      t.end()
+    })
+  })
+  t.test('hasIn', (t) => {
+    t.ok(new ValueMap().set('foo', 'bar').hasIn(['foo']))
+    t.ok(new ValueMap(1).hasIn([]))
+    t.notOk(new ValueMap(1).hasIn(['foo']))
+    t.end()
+  })
   t.end()
 })
