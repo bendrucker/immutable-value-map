@@ -30,6 +30,13 @@ test((t) => {
       t.equal(deleted.get(), undefined)
       t.end()
     })
+    t.test('map', (t) => {
+      const map = new ValueMap().set('foo', 'bar')
+      t.equal(map, map.delete('bar'))
+      t.notEqual(map, map.delete('foo'))
+      t.notOk(map.delete('foo').has('foo'))
+      t.end()
+    })
     t.end()
   })
   t.test('clear', (t) => {

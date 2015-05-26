@@ -28,7 +28,7 @@ export default class ValueMap {
       if (this.__value__ === undefined) return this
       return new this.constructor(undefined)
     }
-    const updated = this.__value__.delete()
+    const updated = this.__value__.delete(key)
     return updated === this.__value__ ? this : new this.constructor(updated)
   }
   clear () {
