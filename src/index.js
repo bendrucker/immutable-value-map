@@ -37,8 +37,7 @@ export default class ValueMap {
   delete (key) {
     if (!this.isMap()) {
       if (key != null) return this
-      if (this.__value__ === undefined) return this
-      return new this.constructor(undefined)
+      return this.__setValue__(undefined)
     }
     return this.__set__(value => value.delete(key))
   }
