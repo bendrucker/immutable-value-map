@@ -5,6 +5,10 @@ import {Map} from 'immutable'
 export default class ValueMap {
   constructor (value) {
     this.__value__ = arguments.length ? value : new Map()
+    this.__valueMap__ = true
+  }
+  static isValueMap (map) {
+    return !!(map && map.__valueMap__)
   }
   isMap () {
     return Map.isMap(this.__value__)
@@ -36,7 +40,7 @@ export default class ValueMap {
   }
   get (key, notSetValue) {
     if (key == null) return this.__value__
-    return this.isMap() ? new this.constructor(this.__value__.get(key, notSetValue)) : notSetValue
+    return this.isMap() ? this.__value__.get(key, notSetValue) : notSetValue
   }
   has (key) {
     return this.isMap() ? this.__value__.has(key) : false

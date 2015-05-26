@@ -1,6 +1,7 @@
 'use strict'
 
 import test from 'tape'
+import {fromJS} from 'immutable'
 import ValueMap from '../'
 
 test((t) => {
@@ -43,6 +44,23 @@ test((t) => {
     const val = new ValueMap()
     t.equal(val.set('foo', 'bar').clear().size, 0)
     t.end()
+  })
+  t.test('get', (t) => {
+    t.test('value', (t) => {
+      const val = new ValueMap(1)
+      t.equal(val.get(), 1)
+      t.equal(val.get('foo', null), null)
+      t.end()
+    })
+    t.test('map', (t) => {
+      let map = new ValueMap().set('foo', 'bar')
+      t.equal(map.get('foo'), 'bar')
+      t.equal(map.get('bar', null), null)
+      map = map.set('foo', fromJS({bar: 'baz'}))
+      t.notOk(ValueMap.isValueMap(map.get('foo')))
+      t.equal(map.get('foo').get('bar'), 'baz')
+      t.end()
+    })
   })
   t.end()
 })
