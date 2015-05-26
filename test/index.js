@@ -62,5 +62,17 @@ test((t) => {
       t.end()
     })
   })
+  t.test('has', (t) => {
+    t.notOk(new ValueMap('foo').has('toString'))
+    t.ok(new ValueMap().set('foo', 'bar').has('foo'))
+    t.notOk(new ValueMap().set('bar', 'baz').has('foo'))
+    t.end()
+  })
+  t.test('includes', (t) => {
+    t.notOk(new ValueMap('foo').includes('foo'))
+    t.ok(new ValueMap().set('foo', 'bar').includes('bar'))
+    t.notOk(new ValueMap().set('bar', 'baz').includes('foo'))
+    t.end()
+  })
   t.end()
 })
