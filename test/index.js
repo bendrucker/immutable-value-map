@@ -45,6 +45,15 @@ test((t) => {
     t.equal(val.set('foo', 'bar').clear().size, 0)
     t.end()
   })
+  t.test('update', (t) => {
+    const val = new ValueMap(1)
+    t.equal(val.update('foo', () => 'bar').get('foo'), 'bar')
+    const map = new ValueMap().set('foo', 'bar')
+    t.equal(map.update('foo', () => 'bar'), map)
+    t.notEqual(map.update('foo', () => 'baz'))
+    t.equal(map.update('foo', () => 'baz').get('foo'), 'baz')
+    t.end()
+  })
   t.test('get', (t) => {
     t.test('value', (t) => {
       const val = new ValueMap(1)
