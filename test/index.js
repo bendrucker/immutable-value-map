@@ -94,6 +94,20 @@ test((t) => {
     t.ok(merged.has('foo') && merged.has('bar'))
     t.end()
   })
+  t.test('setIn', (t) => {
+    t.test('value', (t) => {
+      const val = new ValueMap(1)
+      t.equal(val.setIn(['foo'], 'bar').get('foo'), 'bar')
+      t.equal(val.setIn([], 2).get(), 2)
+      t.end()
+    })
+    t.test('map', (t) => {
+      const map = new ValueMap()
+      t.equal(map.setIn(['foo'], 'bar').get('foo'), 'bar')
+      t.end()
+    })
+    t.end()
+  })
   t.test('get', (t) => {
     t.test('value', (t) => {
       const val = new ValueMap(1)

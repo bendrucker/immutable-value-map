@@ -17,11 +17,10 @@ export default class ValueMap {
   get size () {
     return this.isMap() ? this.__value__.size : 0
   }
+  __setValue__ (value) {
+    return value === this.__value__ ? this : new this.constructor(value)
+  }
   __set__ (updater) {
-    if (typeof updater !== 'function') {
-      const value = updater
-      return value === this.__value__ ? this : new this.constructor(value)
-    }
     const updated = updater.call(this, this.__value__)
     return updated === this.__value__ ? this : new this.constructor(updated)
   }
@@ -29,7 +28,7 @@ export default class ValueMap {
     assert(typeof key !== 'function', 'key may not be a function')
     if (arguments.length === 1) {
       value = key
-      return this.__set__(value)
+      return this.__setValue__(value, true)
     }
     return this.__set__((oldValue) => {
       return (this.isMap() ? oldValue : new Map()).set(key, value)
@@ -61,6 +60,11 @@ export default class ValueMap {
   mergeDeepWith (merger, ...iterables) {
     if (!this.isMap()) return new this.constructor().mergeDeepWith(merger, ...iterables)
     return this.__set__(value => value.mergeDeepWith(merger, ...iterables))
+  }
+  setIn (keyPath, value) {
+    if (this.isMap()) return this.__set__(oldValue => oldValue.setIn(keyPath, value))
+    if (keyPath.length) return new this.constructor().setIn(keyPath, value)
+    return this.__setValue__(value)
   }
   get (key, notSetValue) {
     if (key == null) return this.__value__
