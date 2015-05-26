@@ -74,5 +74,13 @@ test((t) => {
     t.notOk(new ValueMap().set('bar', 'baz').includes('foo'))
     t.end()
   })
+  t.test('first / last', (t) => {
+    t.equal(new ValueMap(1).first(), undefined)
+    t.equal(new ValueMap(1).last(), undefined)
+    const map = new ValueMap().set('foo', 'bar')
+    t.equal(map.first(), 'bar')
+    t.equal(map.last(), 'bar')
+    t.end()
+  })
   t.end()
 })

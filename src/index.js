@@ -49,10 +49,10 @@ export default class ValueMap {
     return this.isMap() ? this.__value__.includes(key) : false
   }
   first () {
-    return this.isMap() ? new this.constructor(this.__value__.first()) : undefined
+    return this.isMap() ? this.__value__.first() : undefined
   }
   last () {
-    return this.isMap() ? new this.constructor(this.__value__.last()) : undefined
+    return this.isMap() ? this.__value__.last() : undefined
   }
   getIn (keyPath, notSetValue) {
     if (this.isMap()) return new this.constructor(this.__value__.getIn(keyPath, notSetValue))
