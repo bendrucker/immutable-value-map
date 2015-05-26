@@ -3,8 +3,8 @@
 import {Map} from 'immutable'
 
 export default class ValueMap {
-  constructor (value = new Map()) {
-    this.__value__ = value // eslint-disable-line no-undef
+  constructor (value) {
+    this.__value__ = arguments.length ? value : new Map()
   }
   isMap () {
     return Map.isMap(this.__value__)
@@ -20,13 +20,19 @@ export default class ValueMap {
     return updated === map ? this : new this.constructor(updated)
   }
   delete (key) {
-    return this.isMap() ? new this.constructor(this.__value__.delete()) : this
+    if (!this.isMap()) {
+      if (key != null) return this
+      if (this.__value__ === undefined) return this
+      return new this.constructor(undefined)
+    }
+    const updated = this.__value__.delete()
+    return updated === this.__value__ ? this : new this.constructor(updated)
   }
   clear () {
     return new this.constructor()
   }
   get (key, notSetValue) {
-    if (typeof key === 'undefined') return this.__value__
+    if (key == null) return this.__value__
     return this.isMap() ? new this.constructor(this.__value__.get(key, notSetValue)) : notSetValue
   }
   has (key) {
