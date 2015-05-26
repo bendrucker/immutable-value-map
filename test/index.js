@@ -32,5 +32,10 @@ test((t) => {
     })
     t.end()
   })
+  t.test('clear', (t) => {
+    const val = new ValueMap()
+    t.equal(val.set('foo', 'bar').clear().size, 0)
+    t.end()
+  })
   t.end()
 })

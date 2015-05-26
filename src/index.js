@@ -9,6 +9,9 @@ export default class ValueMap {
   isMap () {
     return Map.isMap(this.__value__)
   }
+  get size () {
+    return this.isMap() ? this.__value__.size : 0
+  }
   set (key, value) {
     if (arguments.length === 1) {
       value = key
