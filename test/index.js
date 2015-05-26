@@ -108,6 +108,13 @@ test((t) => {
     })
     t.end()
   })
+  t.test('deleteIn', (t) => {
+    const val = new ValueMap(1)
+    t.equal(val.deleteIn(['foo']), val)
+    t.equal(val.deleteIn([]).get(), undefined)
+    t.notOk(new ValueMap().set('foo', 'bar').deleteIn(['foo']).has('foo'))
+    t.end()
+  })
   t.test('get', (t) => {
     t.test('value', (t) => {
       const val = new ValueMap(1)

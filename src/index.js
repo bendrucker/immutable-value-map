@@ -66,6 +66,12 @@ export default class ValueMap {
     if (keyPath.length) return new this.constructor().setIn(keyPath, value)
     return this.__setValue__(value)
   }
+  deleteIn (keyPath) {
+    if (!this.isMap()) {
+      return keyPath.length ? this : this.__setValue__(undefined)
+    }
+    return this.__set__(value => value.deleteIn(keyPath))
+  }
   get (key, notSetValue) {
     if (key == null) return this.__value__
     return this.isMap() ? this.__value__.get(key, notSetValue) : notSetValue
