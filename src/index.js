@@ -43,6 +43,21 @@ export default class ValueMap {
     const updated = this.__value__.update(...arguments)
     return updated === this.__value__ ? this : new this.constructor(updated)
   }
+  merge (...iterables) {
+    if (!this.isMap()) return new this.constructor().merge(...iterables)
+    const updated = this.__value__.merge(...iterables)
+    return updated === this.__value__ ? this : new this.constructor(updated)
+  }
+  mergeDeep (...iterables) {
+    if (!this.isMap()) return new this.constructor().mergeDeep(...iterables)
+    const updated = this.__value__.mergeDeep(...iterables)
+    return updated === this.__value__ ? this : new this.constructor(updated)
+  }
+  mergeDeepWith (merger, ...iterables) {
+    if (!this.isMap()) return new this.constructor().mergeDeepWith(merger, ...iterables)
+    const updated = this.__value__.mergeDeepWith(merger, ...iterables)
+    return updated === this.__value__ ? this : new this.constructor(updated)
+  }
   get (key, notSetValue) {
     if (key == null) return this.__value__
     return this.isMap() ? this.__value__.get(key, notSetValue) : notSetValue
