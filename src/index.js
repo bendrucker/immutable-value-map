@@ -42,7 +42,8 @@ export default class ValueMap {
     return this.__set__(value => value.delete(key))
   }
   clear () {
-    return new this.constructor()
+    if (!this.isMap()) return this.__setValue__(new Map())
+    return this.__set__(value => value.clear())
   }
   update () {
     if (!this.isMap()) return new this.constructor().update(...arguments)

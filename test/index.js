@@ -44,6 +44,7 @@ test((t) => {
   t.test('clear', (t) => {
     const val = new ValueMap()
     t.equal(val.set('foo', 'bar').clear().size, 0)
+    t.equal(val, val.clear())
     t.end()
   })
   t.test('update', (t) => {
