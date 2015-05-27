@@ -102,8 +102,8 @@ export default class ValueMap {
   has (key) {
     return this.isMap() ? this.get().has(key) : false
   }
-  includes (key) {
-    return this.isMap() ? this.get().includes(key) : false
+  includes (value) {
+    return this.isMap() ? this.get().includes(value) : this.get() === value
   }
   first () {
     return this.isMap() ? this.get().first() : undefined
