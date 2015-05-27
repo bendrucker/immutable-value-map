@@ -96,27 +96,27 @@ export default class ValueMap {
     return this.isMap() ? this.__value__.get(key, notSetValue) : notSetValue
   }
   has (key) {
-    return this.isMap() ? this.__value__.has(key) : false
+    return this.isMap() ? this.get().has(key) : false
   }
   includes (key) {
-    return this.isMap() ? this.__value__.includes(key) : false
+    return this.isMap() ? this.get().includes(key) : false
   }
   first () {
-    return this.isMap() ? this.__value__.first() : undefined
+    return this.isMap() ? this.get().first() : undefined
   }
   last () {
-    return this.isMap() ? this.__value__.last() : undefined
+    return this.isMap() ? this.get().last() : undefined
   }
   getIn (keyPath, notSetValue) {
-    if (this.isMap()) return this.__value__.getIn(keyPath, notSetValue)
-    return !keyPath.length ? this.__value__ : notSetValue
+    if (this.isMap()) return this.get().getIn(keyPath, notSetValue)
+    return !keyPath.length ? this.get() : notSetValue
   }
   hasIn (keyPath) {
-    if (this.isMap()) return this.__value__.hasIn(keyPath)
+    if (this.isMap()) return this.get().hasIn(keyPath)
     return !keyPath.length
   }
   toString () {
-    return `ValueMap<${this.__value__.toString()}>`
+    return `ValueMap<${this.get().toString()}>`
   }
   inspect () {
     return this.toString()
