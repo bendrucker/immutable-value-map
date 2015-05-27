@@ -113,7 +113,7 @@ export default class ValueMap {
   }
   getIn (keyPath, notSetValue) {
     if (this.isMap()) return this.get().getIn(keyPath, notSetValue)
-    return !keyPath.length ? this.get() : notSetValue
+    return !keyPath.length ? this.get(undefined, notSetValue) : notSetValue
   }
   hasIn (keyPath) {
     if (this.isMap()) return this.get().hasIn(keyPath)

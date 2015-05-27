@@ -189,6 +189,7 @@ test((t) => {
     t.test('value', (t) => {
       const val = new ValueMap(1)
       t.equal(val.getIn([]), 1)
+      t.equal(val.delete().getIn([], null), null)
       t.equal(val.getIn(['key'], null), null)
       t.end()
     })
