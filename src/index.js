@@ -115,6 +115,12 @@ export default class ValueMap {
     if (this.isMap()) return this.get().hasIn(keyPath)
     return !keyPath.length
   }
+  toJS () {
+    return this.isMap() ? this.get().toJS() : this.get()
+  }
+  toJSON () {
+    return this.toJS()
+  }
   toString () {
     return `ValueMap<${this.get().toString()}>`
   }

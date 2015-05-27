@@ -204,5 +204,12 @@ test((t) => {
     t.notOk(new ValueMap(1).hasIn(['foo']))
     t.end()
   })
+  t.test('toJS', (t) => {
+    t.equal(new ValueMap(1).toJS(), 1)
+    t.deepEqual(new ValueMap().set('foo', 'bar').toJS(), {
+      foo: 'bar'
+    })
+    t.end()
+  })
   t.end()
 })
