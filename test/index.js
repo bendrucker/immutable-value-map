@@ -10,6 +10,7 @@ test((t) => {
       const val = new ValueMap(1)
       t.equal(val.set(1), val)
       t.notEqual(val.set(2), val)
+      t.throws(val.set.bind(val, () => {}), /key may not be a function/)
       t.end()
     })
     t.test('map', (t) => {
