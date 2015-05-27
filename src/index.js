@@ -71,6 +71,22 @@ export default class ValueMap {
     }
     return this.__set__(value => value.deleteIn(keyPath))
   }
+  updateIn (keyPath, notSetValue, updater) {
+    if (arguments.length < 3) {
+      updater = notSetValue
+      notSetValue = undefined
+    }
+    if (this.isMap()) {
+      return this.__set__(value => value.updateIn(keyPath, notSetValue, updater))
+    }
+    if (keyPath.length) {
+      return new this.constructor().updateIn(keyPath, notSetValue, updater)
+    }
+    if (this.__value__ === undefined) {
+      return this.__setValue__(notSetValue)
+    }
+    return this.__set__(updater)
+  }
   get (key, notSetValue) {
     if (key == null) return this.__value__
     return this.isMap() ? this.__value__.get(key, notSetValue) : notSetValue

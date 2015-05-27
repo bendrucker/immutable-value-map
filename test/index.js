@@ -115,6 +115,22 @@ test((t) => {
     t.notOk(new ValueMap().set('foo', 'bar').deleteIn(['foo']).has('foo'))
     t.end()
   })
+  t.test('updateIn', (t) => {
+    t.test('value', (t) => {
+      let val = new ValueMap(1)
+      t.equal(val.updateIn(['foo'], 1, value => value + 1).get('foo'), 2)
+      t.equal(val.updateIn([], value => value + 1).get(), 2)
+      val = val.delete()
+      t.equal(val.updateIn([], 0, () => {}).get(), 0)
+      t.end()
+    })
+    t.test('map', (t) => {
+      const map = new ValueMap().updateIn(['foo'], () => 'bar')
+      t.deepEqual(map.get('foo'), 'bar')
+      t.end()
+    })
+    t.end()
+  })
   t.test('get', (t) => {
     t.test('value', (t) => {
       const val = new ValueMap(1)
