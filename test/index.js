@@ -50,6 +50,7 @@ test((t) => {
   t.test('update', (t) => {
     const val = new ValueMap(1)
     t.equal(val.update('foo', () => 'bar').get('foo'), 'bar')
+    t.equal(val.set(undefined).get(undefined, null), null)
     const map = new ValueMap().set('foo', 'bar')
     t.equal(map.update('foo', () => 'bar'), map)
     t.notEqual(map.update('foo', () => 'baz'))

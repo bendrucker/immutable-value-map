@@ -93,7 +93,10 @@ export default class ValueMap {
     return new this.constructor().mergeIn(keyPath, ...iterables)
   }
   get (key, notSetValue) {
-    if (key == null) return this.__value__
+    if (key == null) {
+      const value = this.__value__
+      return typeof value === 'undefined' ? notSetValue : value
+    }
     return this.isMap() ? this.__value__.get(key, notSetValue) : notSetValue
   }
   has (key) {
