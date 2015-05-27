@@ -87,6 +87,10 @@ export default class ValueMap {
     }
     return this.__set__(updater)
   }
+  mergeIn (keyPath, ...iterables) {
+    if (this.isMap()) return this.__set__(value => value.mergeIn(keyPath, ...iterables))
+    return new this.constructor().mergeIn(keyPath, ...iterables)
+  }
   get (key, notSetValue) {
     if (key == null) return this.__value__
     return this.isMap() ? this.__value__.get(key, notSetValue) : notSetValue

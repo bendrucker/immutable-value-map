@@ -131,6 +131,20 @@ test((t) => {
     })
     t.end()
   })
+  t.test('mergeIn', (t) => {
+    const val = new ValueMap(1)
+    t.equal(val.mergeIn([], {foo: 'bar'}).get('foo'), 'bar')
+    const map = new ValueMap()
+    t.equal(map.mergeIn([], {foo: 'bar'}).get('foo'), 'bar')
+    t.end()
+  })
+  t.test('mergeDeepIn', (t) => {
+    const val = new ValueMap(1)
+    t.equal(val.mergeIn([], {foo: 'bar'}).get('foo'), 'bar')
+    const map = new ValueMap()
+    t.equal(map.mergeIn([], {foo: 'bar'}).get('foo'), 'bar')
+    t.end()
+  })
   t.test('get', (t) => {
     t.test('value', (t) => {
       const val = new ValueMap(1)
