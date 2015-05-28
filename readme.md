@@ -2,7 +2,7 @@
 
 > Immutable data structure that can store a primitive value or an Immutable.js Map
 
-immutable-value-map creates immutable data structures called `ValueMap`s. These structures provide API-compatibility with the majority of the [`immutable.Map`](http://facebook.github.io/immutable-js/docs/#/Map) with special semantics for handling plain values.
+ValueMaps are data structures that provide API compatibility with the majority of the [`immutable.Map`](http://facebook.github.io/immutable-js/docs/#/Map) API with special semantics for handling plain values.
 
 ## Install
 
