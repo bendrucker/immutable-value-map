@@ -1,7 +1,7 @@
 {
   "name": "immutable-value-map",
   "main": "./src",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Immutable data structure that can store a primitive value or an Immutable.js Map",
   "license": "MIT",
   "repository": "bendrucker/immutable-value-map",
