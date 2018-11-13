@@ -1,4 +1,4 @@
-# immutable-value-map [![Build Status](https://travis-ci.org/bendrucker/immutable-value-map.svg?branch=master)](https://travis-ci.org/bendrucker/immutable-value-map)
+# immutable-value-map [![Build Status](https://travis-ci.org/bendrucker/immutable-value-map.svg?branch=master)](https://travis-ci.org/bendrucker/immutable-value-map) [![Greenkeeper badge](https://badges.greenkeeper.io/bendrucker/immutable-value-map.svg)](https://greenkeeper.io/)
 
 > Immutable data structure that can store a primitive value or an Immutable.js Map
 
