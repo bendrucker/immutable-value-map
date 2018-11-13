@@ -22,10 +22,10 @@
     "value"
   ],
   "dependencies": {
-    "immutable": "~3.7.3"
+    "immutable": "~3.8.2"
   },
   "devDependencies": {
-    "babel": "^5.0.0",
+    "babel": "^6.23.0",
     "babel-tape-runner": "*",
     "tape": "^4.0.0",
     "standard": "bendrucker/standard#babel",
